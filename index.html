@@ -7,63 +7,527 @@
 <meta name="description" content="anuj sangwan writes about random things.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@300;400&display=swap">
 <style>
   :root {
-    --bg: #1C1B1A;
-    --fg: #E6E2DD;
-    --muted: #968E85;
-    --accent: #B09B82;
-    --border: #33302D;
+    --desk-bg: #E7E3DC;
+    --desk-dot: rgba(0, 0, 0, 0.04);
+    --card-bg: #F5F2EB;
+    --ink: #22201E;
+    --muted: #6E685F;
+    --tape: rgba(232, 222, 196, 0.78);
+    --shadow: 0 14px 28px rgba(0, 0, 0, 0.14), 0 4px 10px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 22px 38px rgba(0, 0, 0, 0.22), 0 8px 16px rgba(0, 0, 0, 0.12);
   }
 
-  html, body {
-    background-color: #1C1B1A !important;
-    color: #E6E2DD !important;
-    transition: background-color 0.3s ease, color 0.3s ease;
+  body.dark {
+    --desk-bg: #1C1B1A;
+    --desk-dot: rgba(255, 255, 255, 0.03);
+    --card-bg: #292725;
+    --ink: #E6E2DD;
+    --muted: #9C948A;
+    --tape: rgba(196, 182, 152, 0.28);
+    --shadow: 0 16px 32px rgba(0, 0, 0, 0.55), 0 4px 10px rgba(0, 0, 0, 0.4);
+    --shadow-hover: 0 24px 44px rgba(0, 0, 0, 0.7), 0 10px 20px rgba(0, 0, 0, 0.5);
   }
 
-  a {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: var(--desk-bg);
+    background-image: radial-gradient(var(--desk-dot) 1px, transparent 0);
+    background-size: 22px 22px;
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  /* Desk Canvas */
+  .desk {
+    position: relative;
+    width: 100%;
+    max-width: 1280px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  /* Interactive Desk Items */
+  .item {
+    position: absolute;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease;
+    user-select: none;
+  }
+
+  .item:hover {
+    transform: translateY(-6px) scale(1.03) rotate(0deg) !important;
+    z-index: 20;
+  }
+
+  /* Masking Tape Effect */
+  .tape {
+    position: absolute;
+    height: 22px;
+    background: var(--tape);
+    backdrop-filter: blur(2px);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    z-index: 5;
+  }
+
+  .handwritten {
+    font-family: 'Caveat', cursive;
+    font-size: 1.45rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* 1. CENTER BUSINESS CARD */
+  .business-card {
+    top: 34%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-1.2deg);
+    width: 310px;
+    background: var(--card-bg);
+    padding: 28px 26px 22px;
+    border-radius: 3px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    border: 1px solid rgba(128,128,128,0.12);
+    cursor: default;
+  }
+
+  .business-card:hover {
+    transform: translate(-50%, -52%) rotate(0deg) !important;
+  }
+
+  .business-card h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 4px;
+  }
+
+  .business-card .subtitle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .business-card .est {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin: 6px 0 22px;
+  }
+
+  .card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-align: left;
+  }
+
+  .scribble {
+    font-family: 'Caveat', cursive;
+    font-size: 1.05rem;
+    color: #5C6B89;
+    line-height: 1.05;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  body.dark .scribble {
+    color: #B09B82;
+  }
+
+  /* 2. POLAROID -> ABOUT */
+  .polaroid {
+    top: 10%;
+    left: 22%;
+    transform: rotate(-7deg);
+    width: 155px;
+    background: #FAF8F5;
+    padding: 11px 11px 14px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    color: #22201E;
+  }
+
+  .polaroid .tape {
+    width: 68px;
+    top: -11px;
+    left: 50%;
+    transform: translateX(-50%) rotate(2deg);
+  }
+
+  .polaroid-img {
+    width: 100%;
+    height: 145px;
+    background: #DCD7CE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+
+  .polaroid-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.08);
+  }
+
+  /* 3. NOTEBOOK -> BLOG / WRITING */
+  .notebook {
+    bottom: 6%;
+    left: 38%;
+    transform: rotate(-2deg);
+    width: 210px;
+    height: 230px;
+    background: #8D9E91;
+    border-radius: 4px 12px 12px 4px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 14px solid #738377;
+  }
+
+  .notebook-label {
+    background: #F4F1EA;
+    color: #22201E;
+    padding: 10px 28px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    transform: rotate(-1deg);
+  }
+
+  /* 4. PHILOSOPHY CUTOUT -> PHILOSOPHY / NOW */
+  .philosophy {
+    top: 8%;
+    right: 24%;
+    transform: rotate(3deg);
+    text-align: center;
+  }
+
+  .phil-badge {
+    width: 105px;
+    height: 105px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: #F4F1EA;
+    color: #22201E;
+    border: 4px solid #FAF8F5;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.6rem;
+  }
+
+  .phil-tape {
+    position: relative;
+    margin-top: -8px;
+    background: var(--tape);
+    padding: 2px 18px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transform: rotate(-2deg);
+  }
+
+  /* 5. MINI QUANT / TERMINAL DEVICE -> NOW / QUANT */
+  .quant-device {
+    top: 47%;
+    left: 20%;
+    transform: rotate(-2deg);
+    width: 165px;
+    background: #235D3A;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+    border: 2px solid #184228;
+  }
+
+  .quant-screen {
+    background: #111315;
     color: #E6E2DD;
-    text-decoration-color: #6B645C;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    padding: 10px;
+    border-radius: 3px;
+    line-height: 1.5;
   }
 
-  a:hover {
-    color: #B09B82 !important;
+  .quant-screen span {
+    color: #7CE38B;
+    display: block;
+    font-weight: 400;
   }
 
-  .clock, .foot, .ph, .elsewhere li:first-child {
-    color: #968E85 !important;
+  /* 6. EARPHONES -> SPOTIFY */
+  .music-item {
+    bottom: 10%;
+    left: 7%;
+    transform: rotate(-4deg);
+    text-align: center;
   }
 
-  .bar, .foot, .elsewhere {
-    border-color: #33302D !important;
+  .music-card {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  /* 7. CAMERA -> MOMENTS / RUNNING */
+  .camera-item {
+    top: 29%;
+    right: 14%;
+    transform: rotate(6deg);
+    width: 175px;
+    height: 112px;
+    background: linear-gradient(145deg, #E2B8C2, #CFA0AC);
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .camera-screen {
+    width: 105px;
+    height: 82px;
+    background: #2C353D;
+    border-radius: 4px;
+    border: 2px solid #4A4446;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #E6E2DD;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    text-align: center;
+    padding: 4px;
+  }
+
+  .camera-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #F4ECEE;
+    border: 2px solid #B58994;
+    margin: 0 auto;
+  }
+
+  /* 8. SMARTPHONE -> SOCIALS */
+  .phone {
+    bottom: 4%;
+    right: 20%;
+    transform: rotate(-3deg);
+    width: 155px;
+    background: #18191C;
+    border-radius: 22px 22px 8px 8px;
+    padding: 14px 12px 18px;
+    box-shadow: var(--shadow);
+    border: 3px solid #32343A;
+  }
+
+  .phone-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .app-icon {
+    background: #2A2D34;
+    color: #F2F4F7;
+    border-radius: 10px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .app-icon:hover {
+    transform: scale(1.12);
+    background: #4A658A;
+  }
+
+  /* 9. RESEARCH PAPER / ESSAY -> RANDOM THOUGHTS */
+  .paper-sheet {
+    bottom: 6%;
+    right: 3%;
+    transform: rotate(-6deg);
+    width: 195px;
+    background: #F7F4EC;
+    color: #2D2A26;
+    padding: 18px 16px;
+    box-shadow: var(--shadow);
+    font-size: 0.62rem;
+    line-height: 1.45;
+  }
+
+  .paper-sheet h4 {
+    font-size: 0.82rem;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+
+  /* 10. TOP-RIGHT LIGHT / WARM CHARCOAL SWITCH */
+  .wall-switch {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    width: 44px;
+    height: 76px;
+    background: #EFECE6;
+    border-radius: 6px;
+    padding: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+    cursor: pointer;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rgba(0,0,0,0.12);
+  }
+
+  .switch-half {
+    height: 48%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    transition: background 0.25s ease;
+  }
+
+  body:not(.dark) .switch-sun {
+    background: #FFFFFF;
+    box-shadow: inset 0 -2px 4px rgba(0,0,0,0.1);
+  }
+
+  body.dark .switch-moon {
+    background: #D6D1C7;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
+  }
+
+  /* Footer note */
+  .desk-note {
+    position: fixed;
+    bottom: 12px;
+    left: 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    opacity: 0.8;
+  }
+
+  /* Mobile Responsive Fallback (Clean Grid on Phones) */
+  @media (max-width: 900px) {
+    .desk {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.2rem;
+      padding: 4.5rem 1.2rem 4rem;
+    }
+    .item, .business-card {
+      position: relative;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+      transform: rotate(0deg) !important;
+    }
+    .business-card:hover {
+      transform: none !important;
+    }
   }
 </style>
 </head>
 <body>
-<header class="bar">
-  <a class="home" href="./">anuj sangwan</a>
-  <nav><a href="blog/">writing</a><a href="about/">about</a><a href="now/">now</a></nav>
-  <span class="clock" data-clock></span>
-</header>
-<main>
-<p class="intro">hi, i'm anuj. i write about basic quant problems, running, discipline, philosophy and <em>whatever i can't stop thinking about</em> — benches, pigeons, grocery stores at 2am — roughly in the order it happens.</p>
 
-<ul class="elsewhere">
-  <li>elsewhere</li>
-  <li><a href="#">instagram <span>@<span class="ph">handle</span> ↗</span></a></li>
-  <li><a href="#">letterboxd <span>@<span class="ph">handle</span> ↗</span></a></li>
-  <li><a href="#">spotify <span><span class="ph">profile</span> ↗</span></a></li>
-  <li><a href="#">x <span>@<span class="ph">handle</span> ↗</span></a></li>
-  <li><a href="#">email <span><span class="ph">hi@…</span></span></a></li>
-</ul>
+<!-- Working Light / Warm Charcoal Switch -->
+<button class="wall-switch" id="themeSwitch" title="Switch light / warm charcoal" aria-label="Toggle theme">
+  <div class="switch-half switch-sun">☀️</div>
+  <div class="switch-half switch-moon">🌙</div>
+</button>
 
-<ol class="timeline" data-timeline></ol>
-<p class="timeline-end"></p>
-</main>
-<footer class="foot">no cookies, no tracking, no newsletter popup. made by hand, slowly.</footer>
-<script src="assets/site.js"></script>
-</body>
-</html>
+<main class="desk">
+
+  <!-- 1. Polaroid -> Opens About Page -->
+  <a href="about/" class="item polaroid" title="About Anuj">
+    <div class="tape"></div>
+    <div class="polaroid-img">
+      <!-- Replace src="assets/me.jpg" with your own photo -->
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="anuj">
+    </div>
+    <span class="handwritten">about</span>
+  </a>
+
+  <!-- 2. Center Identity Card -->
+  <div class="item business-card">
+    <h1>Anuj Sangwan</h1>
+    <div class="subtitle">QUANT &amp; WRITER</div>
+    <div class="est">2am thoughts &amp; discipline</div>
+    <div class="card-bottom">
+      <div>HAS CURIOSITY</div>
+      <div>
+        HAS <del>SLEEP</del><br>
+        <span class="scribble">running &amp; books<br>+ overthinking<br>+ 2am groceries</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Cutout -> Opens Philosophy / Now Page -->
+  <a href="now/" class="item philosophy" title="What I'm thinking about now">
+    <div class="phil-badge">🏛️</div>
+    <div class="phil-tape"><span class="handwritten">philosophy</span></div>
+  </a>
+
+  <!-- 4. Mini Quant Board -> Opens Quant / Projects -->
+  <a href="blog/" class="item quant-device" title="Quant problems & notes">
+    <div class="quant-screen">
+      ~/quant-notes
+      <span>∑ E[X] = μ</span>
+      click to read →
+    </div>
+  </a>
+
+  <!-- 5. Pink Digital Camera -> Opens Moments / Running -->
+  <a href="now/" class="item camera-item" title="Running & 2am walks">
+    <div class="camera-screen">running &amp;<br>pigeons</div>
+    <div class="camera-btn"></div>
+  </a>
+
+  <!-- 6. Earphones -> Opens Spotify -->
+  <a href="https://open.spotify.com" target="_blank" rel="noopener" class="item music-item" title="Spotify playlists">
+    <div class="music-card">
+      <svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+        <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-
