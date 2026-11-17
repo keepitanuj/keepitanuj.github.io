@@ -7,28 +7,32 @@
 <meta name="description" content="anuj sangwan writes about random things.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@300;400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap">
 <style>
+  /* Dark Theme: Warm Charcoal */
   :root {
-    --desk-bg: #E7E3DC;
-    --desk-dot: rgba(0, 0, 0, 0.04);
-    --card-bg: #F5F2EB;
-    --ink: #22201E;
-    --muted: #6E685F;
-    --tape: rgba(232, 222, 196, 0.78);
-    --shadow: 0 14px 28px rgba(0, 0, 0, 0.14), 0 4px 10px rgba(0, 0, 0, 0.08);
-    --shadow-hover: 0 22px 38px rgba(0, 0, 0, 0.22), 0 8px 16px rgba(0, 0, 0, 0.12);
+    --bg: #1C1B1A;
+    --fg: #E6E2DD;
+    --body-text: #D4CFC9;
+    --list-text: #C7C1BA;
+    --muted: #968E85;
+    --accent: #B09B82;
+    --border: #33302D;
+    --underline: #5C554E;
+    --pill-active-bg: #2B2927;
   }
 
-  body.dark {
-    --desk-bg: #1C1B1A;
-    --desk-dot: rgba(255, 255, 255, 0.03);
-    --card-bg: #292725;
-    --ink: #E6E2DD;
-    --muted: #9C948A;
-    --tape: rgba(196, 182, 152, 0.28);
-    --shadow: 0 16px 32px rgba(0, 0, 0, 0.55), 0 4px 10px rgba(0, 0, 0, 0.4);
-    --shadow-hover: 0 24px 44px rgba(0, 0, 0, 0.7), 0 10px 20px rgba(0, 0, 0, 0.5);
+  /* Bright Theme: Muted Mist Grey */
+  [data-theme="light"] {
+    --bg: #F2F4F7;
+    --fg: #1F242D;
+    --body-text: #2D3440;
+    --list-text: #384150;
+    --muted: #647082;
+    --accent: #4A658A;
+    --border: #DCE1E8;
+    --underline: #A3B0C2;
+    --pill-active-bg: #E2E7EE;
   }
 
   * {
@@ -37,497 +41,292 @@
     padding: 0;
   }
 
-  body {
-    background-color: var(--desk-bg);
-    background-image: radial-gradient(var(--desk-dot) 1px, transparent 0);
-    background-size: 22px 22px;
-    color: var(--ink);
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-    transition: background-color 0.4s ease, color 0.4s ease;
+  html, body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  /* Desk Canvas */
-  .desk {
-    position: relative;
-    width: 100%;
-    max-width: 1280px;
-    min-height: 100vh;
+  .wrap {
+    max-width: 660px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 3.5rem 1.5rem 5rem;
   }
 
-  /* Interactive Desk Items */
-  .item {
-    position: absolute;
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease;
-    user-select: none;
-  }
-
-  .item:hover {
-    transform: translateY(-6px) scale(1.03) rotate(0deg) !important;
-    z-index: 20;
-  }
-
-  /* Masking Tape Effect */
-  .tape {
-    position: absolute;
-    height: 22px;
-    background: var(--tape);
-    backdrop-filter: blur(2px);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    z-index: 5;
-  }
-
-  .handwritten {
-    font-family: 'Caveat', cursive;
-    font-size: 1.45rem;
-    letter-spacing: 0.02em;
-  }
-
-  /* 1. CENTER BUSINESS CARD */
-  .business-card {
-    top: 34%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(-1.2deg);
-    width: 310px;
-    background: var(--card-bg);
-    padding: 28px 26px 22px;
-    border-radius: 3px;
-    box-shadow: var(--shadow);
-    text-align: center;
-    border: 1px solid rgba(128,128,128,0.12);
-    cursor: default;
-  }
-
-  .business-card:hover {
-    transform: translate(-50%, -52%) rotate(0deg) !important;
-  }
-
-  .business-card h1 {
-    font-size: 2rem;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    margin-bottom: 4px;
-  }
-
-  .business-card .subtitle {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .business-card .est {
-    font-style: italic;
-    font-size: 0.9rem;
-    color: var(--muted);
-    margin: 6px 0 22px;
-  }
-
-  .card-bottom {
+  /* Top Header & Divider */
+  header.bar {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    text-align: left;
-  }
-
-  .scribble {
-    font-family: 'Caveat', cursive;
-    font-size: 1.05rem;
-    color: #5C6B89;
-    line-height: 1.05;
-    text-transform: none;
-    letter-spacing: 0;
-  }
-
-  body.dark .scribble {
-    color: #B09B82;
-  }
-
-  /* 2. POLAROID -> ABOUT */
-  .polaroid {
-    top: 10%;
-    left: 22%;
-    transform: rotate(-7deg);
-    width: 155px;
-    background: #FAF8F5;
-    padding: 11px 11px 14px;
-    box-shadow: var(--shadow);
-    text-align: center;
-    color: #22201E;
-  }
-
-  .polaroid .tape {
-    width: 68px;
-    top: -11px;
-    left: 50%;
-    transform: translateX(-50%) rotate(2deg);
-  }
-
-  .polaroid-img {
-    width: 100%;
-    height: 145px;
-    background: #DCD7CE;
-    display: flex;
     align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    margin-bottom: 8px;
+    padding-bottom: 1.25rem;
+    margin-bottom: 2.25rem;
+    border-bottom: 1px solid var(--border);
+    transition: border-color 0.3s ease;
   }
 
-  .polaroid-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(100%) contrast(1.08);
-  }
-
-  /* 3. NOTEBOOK -> BLOG / WRITING */
-  .notebook {
-    bottom: 6%;
-    left: 38%;
-    transform: rotate(-2deg);
-    width: 210px;
-    height: 230px;
-    background: #8D9E91;
-    border-radius: 4px 12px 12px 4px;
-    box-shadow: var(--shadow);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-left: 14px solid #738377;
-  }
-
-  .notebook-label {
-    background: #F4F1EA;
-    color: #22201E;
-    padding: 10px 28px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-    transform: rotate(-1deg);
-  }
-
-  /* 4. PHILOSOPHY CUTOUT -> PHILOSOPHY / NOW */
-  .philosophy {
-    top: 8%;
-    right: 24%;
-    transform: rotate(3deg);
-    text-align: center;
-  }
-
-  .phil-badge {
-    width: 105px;
-    height: 105px;
-    margin: 0 auto;
-    border-radius: 50%;
-    background: #F4F1EA;
-    color: #22201E;
-    border: 4px solid #FAF8F5;
-    box-shadow: var(--shadow);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.6rem;
-  }
-
-  .phil-tape {
-    position: relative;
-    margin-top: -8px;
-    background: var(--tape);
-    padding: 2px 18px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transform: rotate(-2deg);
-  }
-
-  /* 5. MINI QUANT / TERMINAL DEVICE -> NOW / QUANT */
-  .quant-device {
-    top: 47%;
-    left: 20%;
-    transform: rotate(-2deg);
-    width: 165px;
-    background: #235D3A;
-    padding: 10px;
-    border-radius: 6px;
-    box-shadow: var(--shadow);
-    border: 2px solid #184228;
-  }
-
-  .quant-screen {
-    background: #111315;
-    color: #E6E2DD;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    padding: 10px;
-    border-radius: 3px;
-    line-height: 1.5;
-  }
-
-  .quant-screen span {
-    color: #7CE38B;
-    display: block;
+  .home {
+    font-size: 1.15rem;
     font-weight: 400;
-  }
-
-  /* 6. EARPHONES -> SPOTIFY */
-  .music-item {
-    bottom: 10%;
-    left: 7%;
-    transform: rotate(-4deg);
-    text-align: center;
-  }
-
-  .music-card {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: var(--card-bg);
-    box-shadow: var(--shadow);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-  }
-
-  /* 7. CAMERA -> MOMENTS / RUNNING */
-  .camera-item {
-    top: 29%;
-    right: 14%;
-    transform: rotate(6deg);
-    width: 175px;
-    height: 112px;
-    background: linear-gradient(145deg, #E2B8C2, #CFA0AC);
-    border-radius: 12px;
-    padding: 12px;
-    box-shadow: var(--shadow);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .camera-screen {
-    width: 105px;
-    height: 82px;
-    background: #2C353D;
-    border-radius: 4px;
-    border: 2px solid #4A4446;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #E6E2DD;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.65rem;
-    text-align: center;
-    padding: 4px;
-  }
-
-  .camera-btn {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: #F4ECEE;
-    border: 2px solid #B58994;
-    margin: 0 auto;
-  }
-
-  /* 8. SMARTPHONE -> SOCIALS */
-  .phone {
-    bottom: 4%;
-    right: 20%;
-    transform: rotate(-3deg);
-    width: 155px;
-    background: #18191C;
-    border-radius: 22px 22px 8px 8px;
-    padding: 14px 12px 18px;
-    box-shadow: var(--shadow);
-    border: 3px solid #32343A;
-  }
-
-  .phone-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-top: 8px;
-  }
-
-  .app-icon {
-    background: #2A2D34;
-    color: #F2F4F7;
-    border-radius: 10px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
+    color: var(--fg);
     text-decoration: none;
-    transition: transform 0.2s ease, background 0.2s ease;
+    letter-spacing: -0.01em;
   }
 
-  .app-icon:hover {
-    transform: scale(1.12);
-    background: #4A658A;
-  }
-
-  /* 9. RESEARCH PAPER / ESSAY -> RANDOM THOUGHTS */
-  .paper-sheet {
-    bottom: 6%;
-    right: 3%;
-    transform: rotate(-6deg);
-    width: 195px;
-    background: #F7F4EC;
-    color: #2D2A26;
-    padding: 18px 16px;
-    box-shadow: var(--shadow);
-    font-size: 0.62rem;
-    line-height: 1.45;
-  }
-
-  .paper-sheet h4 {
-    font-size: 0.82rem;
-    margin-bottom: 6px;
-    text-align: center;
-  }
-
-  /* 10. TOP-RIGHT LIGHT / WARM CHARCOAL SWITCH */
-  .wall-switch {
-    position: fixed;
-    top: 20px;
-    right: 24px;
-    width: 44px;
-    height: 76px;
-    background: #EFECE6;
-    border-radius: 6px;
-    padding: 6px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.18);
-    cursor: pointer;
-    z-index: 100;
+  .nav-right {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border: 1px solid rgba(0,0,0,0.12);
+    align-items: center;
+    gap: 1.25rem;
   }
 
-  .switch-half {
-    height: 48%;
+  nav {
+    display: flex;
+    gap: 1.25rem;
+    font-size: 0.92rem;
+  }
+
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  nav a:hover {
+    color: var(--accent);
+  }
+
+  /* Separate Moon & Sun Theme Buttons */
+  .theme-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2px;
+    gap: 2px;
+    transition: border-color 0.3s ease;
+  }
+
+  .theme-btn {
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: var(--muted);
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 3px;
-    font-size: 0.9rem;
-    transition: background 0.25s ease;
+    width: 28px;
+    height: 26px;
+    padding: 0;
+    transition: color 0.2s ease, background-color 0.2s ease;
   }
 
-  body:not(.dark) .switch-sun {
-    background: #FFFFFF;
-    box-shadow: inset 0 -2px 4px rgba(0,0,0,0.1);
+  .theme-btn:hover {
+    color: var(--fg);
   }
 
-  body.dark .switch-moon {
-    background: #D6D1C7;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
+  .theme-btn svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
-  /* Footer note */
-  .desk-note {
-    position: fixed;
-    bottom: 12px;
-    left: 18px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
+  /* Highlight the active theme button */
+  html:not([data-theme="light"]) #btn-dark,
+  html[data-theme="light"] #btn-light {
+    background-color: var(--pill-active-bg);
+    color: var(--accent);
+  }
+
+  /* Main Bio Paragraphs */
+  .bio p {
+    margin-bottom: 1.25rem;
+    color: var(--body-text);
+  }
+
+  .bio strong {
+    font-weight: 500;
+    color: var(--fg);
+  }
+
+  /* Inline Links */
+  a.inline {
+    color: var(--fg);
+    text-decoration: underline;
+    text-decoration-color: var(--underline);
+    text-underline-offset: 4px;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  }
+
+  a.inline:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+
+  /* Section Blocks */
+  section {
+    margin-top: 2.5rem;
+  }
+
+  h2 {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--fg);
+    margin-bottom: 1rem;
+    letter-spacing: 0.01em;
+  }
+
+  ul.clean-list {
+    list-style: none;
+  }
+
+  ul.clean-list li {
+    position: relative;
+    padding-left: 1.15rem;
+    margin-bottom: 0.75rem;
+    color: var(--list-text);
+  }
+
+  ul.clean-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
     color: var(--muted);
-    opacity: 0.8;
   }
 
-  /* Mobile Responsive Fallback (Clean Grid on Phones) */
-  @media (max-width: 900px) {
-    .desk {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2.2rem;
-      padding: 4.5rem 1.2rem 4rem;
+  ul.clean-list strong {
+    font-weight: 500;
+    color: var(--fg);
+  }
+
+  /* Elsewhere / Links Row */
+  .links-row {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    font-size: 0.92rem;
+    transition: border-color 0.3s ease;
+  }
+
+  /* Footer */
+  footer.foot {
+    margin-top: 3rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 520px) {
+    .wrap {
+      padding: 2.5rem 1.25rem 4rem;
     }
-    .item, .business-card {
-      position: relative;
-      top: auto !important;
-      left: auto !important;
-      right: auto !important;
-      bottom: auto !important;
-      transform: rotate(0deg) !important;
-    }
-    .business-card:hover {
-      transform: none !important;
+    header.bar {
+      flex-wrap: wrap;
+      gap: 0.75rem;
     }
   }
 </style>
+<script>
+  // Load saved theme immediately to prevent screen flash
+  (function() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  })();
+</script>
 </head>
 <body>
+  <div class="wrap">
+    <header class="bar">
+      <a class="home" href="./">anuj sangwan</a>
+      <div class="nav-right">
+        <nav>
+          <a href="blog/">writing</a>
+          <a href="about/">about</a>
+          <a href="now/">now</a>
+        </nav>
 
-<!-- Working Light / Warm Charcoal Switch -->
-<button class="wall-switch" id="themeSwitch" title="Switch light / warm charcoal" aria-label="Toggle theme">
-  <div class="switch-half switch-sun">☀️</div>
-  <div class="switch-half switch-moon">🌙</div>
-</button>
-
-<main class="desk">
-
-  <!-- 1. Polaroid -> Opens About Page -->
-  <a href="about/" class="item polaroid" title="About Anuj">
-    <div class="tape"></div>
-    <div class="polaroid-img">
-      <!-- Replace src="assets/me.jpg" with your own photo -->
-      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="anuj">
-    </div>
-    <span class="handwritten">about</span>
-  </a>
-
-  <!-- 2. Center Identity Card -->
-  <div class="item business-card">
-    <h1>Anuj Sangwan</h1>
-    <div class="subtitle">QUANT &amp; WRITER</div>
-    <div class="est">2am thoughts &amp; discipline</div>
-    <div class="card-bottom">
-      <div>HAS CURIOSITY</div>
-      <div>
-        HAS <del>SLEEP</del><br>
-        <span class="scribble">running &amp; books<br>+ overthinking<br>+ 2am groceries</span>
+        <!-- Dual Theme Switcher: Moon (Dark) & Sun (Bright) -->
+        <div class="theme-group" role="group" aria-label="Theme switcher">
+          <button type="button" class="theme-btn" id="btn-dark" aria-label="Dark theme" title="Dark theme">
+            <svg viewBox="0 0 24 24">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+          <button type="button" class="theme-btn" id="btn-light" aria-label="Bright theme" title="Bright theme">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+            </svg>
+          </button>
+        </div>
       </div>
-    </div>
+    </header>
+
+    <main>
+      <div class="bio">
+        <p>hi, i'm <strong>anuj</strong>. i'm drawn to quiet routines, clear thinking, and understanding how things actually work beneath the surface.</p>
+        
+        <p>i spend my time solving <strong>basic quant problems</strong>, going on long runs, and writing essays about discipline, human psychology, and <em>whatever i can't stop thinking about</em> — benches, pigeons, grocery stores at 2am — roughly in the order it happens.</p>
+      </div>
+
+      <section>
+        <h2>Things I enjoy:</h2>
+        <ul class="clean-list">
+          <li><strong>Long-distance running:</strong> Early mornings, steady pacing, and the clarity that comes after the first few kilometres.</li>
+          <li><strong>Math &amp; quant puzzles:</strong> Probability, mental math, and clean problem-solving without unnecessary noise.</li>
+          <li><strong>Reflective writing:</strong> Unpacking childhood habits, self-awareness, and everyday philosophy on my <a class="inline" href="blog/">writing</a> page.</li>
+          <li><strong>Cinema &amp; music:</strong> Logging films on <a class="inline" href="#">letterboxd</a> and curating late-night playlists on <a class="inline" href="#">spotify</a>.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Right now:</h2>
+        <ul class="clean-list">
+          <li>Building this personal corner of the internet slowly, by hand.</li>
+          <li>Focusing on consistency over intensity—in running, reading, and work.</li>
+          <li>More details on my <a class="inline" href="now/">now</a> page.</li>
+        </ul>
+      </section>
+
+      <div class="links-row">
+        <a class="inline" href="#">instagram</a>
+        <a class="inline" href="#">letterboxd</a>
+        <a class="inline" href="#">spotify</a>
+        <a class="inline" href="#">x</a>
+        <a class="inline" href="mailto:hi@example.com">email</a>
+      </div>
+    </main>
+
+    <footer class="foot">
+      no cookies, no tracking, no newsletter popup. made by hand, slowly.
+    </footer>
   </div>
 
-  <!-- 3. Cutout -> Opens Philosophy / Now Page -->
-  <a href="now/" class="item philosophy" title="What I'm thinking about now">
-    <div class="phil-badge">🏛️</div>
-    <div class="phil-tape"><span class="handwritten">philosophy</span></div>
-  </a>
+  <script>
+    const btnDark = document.getElementById('btn-dark');
+    const btnLight = document.getElementById('btn-light');
 
-  <!-- 4. Mini Quant Board -> Opens Quant / Projects -->
-  <a href="blog/" class="item quant-device" title="Quant problems & notes">
-    <div class="quant-screen">
-      ~/quant-notes
-      <span>∑ E[X] = μ</span>
-      click to read →
-    </div>
-  </a>
+    btnDark.addEventListener('click', () => {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'dark');
+    });
 
-  <!-- 5. Pink Digital Camera -> Opens Moments / Running -->
-  <a href="now/" class="item camera-item" title="Running & 2am walks">
-    <div class="camera-screen">running &amp;<br>pigeons</div>
-    <div class="camera-btn"></div>
-  </a>
-
-  <!-- 6. Earphones -> Opens Spotify -->
-  <a href="https://open.spotify.com" target="_blank" rel="noopener" class="item music-item" title="Spotify playlists">
-    <div class="music-card">
-      <svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
-        <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-
+    btnLight.addEventListener('click', () => {
+      document.documentElement.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+    });
+  </script>
+</body>
+</html>
