@@ -1,0 +1,309 @@
+/*
+  anuj sangwan — mockup
+  one idea: time is the only organising principle.
+  posts sit as far apart as the days between them; /now fades with age.
+*/
+
+:root {
+  --paper: #f2f1ec;
+  --ink: #1c1c1a;
+  --muted: #8b8980;
+  --faint: #b9b7ae;
+  --line: #d9d7ce;
+  --serif: "Newsreader", Georgia, serif;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+  --gutter: 13rem;         /* the margin where time lives */
+  --col: 34rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #151514;
+    --ink: #e9e7e0;
+    --muted: #8a887f;
+    --faint: #57564f;
+    --line: #2c2b28;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--paper); }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.55;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  padding: 2.5rem 0 8rem calc(6vw + var(--gutter));
+}
+
+::selection { background: var(--ink); color: var(--paper); }
+
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; text-decoration-color: var(--faint); }
+a:hover { text-decoration-color: var(--ink); }
+
+.mono, time, .meta {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.01em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- top bar ---------- */
+
+.bar {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  max-width: calc(var(--col) + 14rem);
+  margin-left: calc(-1 * var(--gutter));
+  margin-bottom: 7rem;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+.bar .home { width: calc(var(--gutter) - 1.5rem); color: var(--ink); text-decoration: none; }
+.bar nav { display: flex; gap: 1.25rem; }
+.bar nav a { text-decoration: none; }
+.bar nav a:hover, .bar nav a[aria-current] { color: var(--ink); }
+.bar nav a[aria-current]::before { content: "→ "; }
+.bar .clock { margin-left: auto; }
+
+/* ---------- homepage intro ---------- */
+
+.intro {
+  max-width: var(--col);
+  font-size: 30px;
+  line-height: 1.25;
+  font-weight: 340;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.75rem;
+}
+.intro em { font-style: italic; }
+
+.elsewhere {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  margin: 0 0 9rem;
+  padding: 0;
+  list-style: none;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+.elsewhere li:first-child { color: var(--muted); }
+.elsewhere a { text-decoration: none; }
+.elsewhere a span { color: var(--muted); }
+.elsewhere a:hover span { color: var(--ink); }
+
+/* ---------- the timeline ---------- */
+
+.timeline {
+  position: relative;
+  max-width: var(--col);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* the axis: a hairline in the margin, running the full length */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0.55rem;
+  bottom: 0.6rem;
+  left: calc(-1 * var(--gutter) + 5.6rem);
+  width: 1px;
+  background: var(--line);
+}
+
+.timeline li { position: relative; }
+
+.timeline .now-mark,
+.timeline .post time {
+  position: absolute;
+  left: calc(-1 * var(--gutter));
+  top: 0.3rem;
+  width: 5rem;
+}
+.timeline .post::before,
+.timeline .now-row::before {
+  /* tick on the axis */
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--gutter) + 5.2rem);
+  top: 0.75rem;
+  width: 0.85rem;
+  height: 1px;
+  background: var(--muted);
+}
+.timeline .now-row { height: 1.5rem; }
+.timeline .now-row::before { background: var(--ink); }
+.timeline .now-mark { color: var(--ink); }
+
+.timeline .gap {
+  display: flex;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--faint);
+  font-style: normal;
+}
+
+.timeline .post a {
+  display: block;
+  text-decoration: none;
+  font-size: 21px;
+  line-height: 1.3;
+}
+.timeline .post .t { transition: opacity 0.2s; }
+.timeline:hover .post .t { opacity: 0.35; }
+.timeline .post a:hover .t { opacity: 1; }
+
+/* excerpt opens under the hovered title */
+.timeline .post .x {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.25s ease;
+}
+.timeline .post .x > span {
+  overflow: hidden;
+  font-size: 16px;
+  font-style: italic;
+  color: var(--muted);
+}
+.timeline .post a:hover .x { grid-template-rows: 1fr; }
+
+.timeline-end {
+  margin: 2.5rem 0 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--faint);
+}
+
+/* ---------- prose pages (about, now, posts) ---------- */
+
+.page { max-width: var(--col); }
+
+.page h1 {
+  font-size: 44px;
+  line-height: 1.08;
+  font-weight: 330;
+  letter-spacing: -0.02em;
+  margin: 0 0 3rem;
+}
+
+.lede { position: relative; }
+.lede .meta {
+  position: absolute;
+  left: calc(-1 * var(--gutter));
+  top: 0.6rem;
+  width: calc(var(--gutter) - 2rem);
+  line-height: 1.7;
+}
+
+.prose p { margin: 0 0 1.1em; }
+.prose h2 {
+  font-size: 19px;
+  font-weight: 500;
+  margin: 2.6em 0 0.6em;
+  position: relative;
+}
+.prose h2 .n {
+  position: absolute;
+  left: calc(-1 * var(--gutter));
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+  top: 0.35em;
+}
+.prose blockquote {
+  margin: 1.6em 0;
+  padding: 0;
+  font-size: 26px;
+  line-height: 1.3;
+  font-style: italic;
+  font-weight: 320;
+}
+.prose ul, .prose ol { padding-left: 1.1em; margin: 0 0 1.1em; }
+.prose li { margin-bottom: 0.25em; }
+.prose figure { margin: 2.2em 0; position: relative; }
+.prose figure .img {
+  aspect-ratio: 4 / 3;
+  background: repeating-linear-gradient(135deg, transparent 0 9px, var(--line) 9px 10px);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+.prose figcaption {
+  position: absolute;
+  left: calc(-1 * var(--gutter));
+  bottom: 0;
+  width: calc(var(--gutter) - 2rem);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.prose sup a { font-family: var(--mono); font-size: 11px; text-decoration: none; color: var(--muted); }
+.prose .notes {
+  margin-top: 3.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+  color: var(--muted);
+}
+.ph { /* placeholder: things only anuj can fill in */
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+  border-bottom: 1px dashed var(--muted);
+  padding: 0 0.15em;
+}
+
+/* earlier / later */
+.adjacent {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+  font-size: 16px;
+}
+.adjacent a { text-decoration: none; display: block; max-width: 15rem; }
+.adjacent a:last-child { text-align: right; margin-left: auto; }
+.adjacent .mono { display: block; margin-bottom: 0.2rem; }
+
+/* ---------- /now ---------- */
+
+.log { margin: 0; padding: 0; list-style: none; }
+.log > li { position: relative; margin-bottom: 3.5rem; transition: opacity 0.3s; }
+.log > li:hover { opacity: 1 !important; }
+.log > li > time {
+  position: absolute;
+  left: calc(-1 * var(--gutter));
+  top: 0.4rem;
+  width: calc(var(--gutter) - 2rem);
+  line-height: 1.7;
+}
+.log dl { margin: 0; display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.5rem 1rem; }
+.log dt { font-family: var(--mono); font-size: 12px; color: var(--muted); padding-top: 0.3rem; }
+.log dd { margin: 0; }
+
+/* ---------- footer ---------- */
+
+.foot {
+  max-width: var(--col);
+  margin-top: 9rem;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--faint);
+}
