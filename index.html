@@ -4,35 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>anuj sangwan</title>
-<meta name="description" content="anuj sangwan writes about random things.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap">
 <style>
-  /* Default Dark Theme: Warm Charcoal */
+  /* Theme Variables */
   body {
-    --bg: #1C1B1A;
+    --bg: #1C1B1A;         /* Warm Charcoal (Dark Mode) */
     --fg: #E6E2DD;
-    --body-text: #D4CFC9;
-    --list-text: #C7C1BA;
     --muted: #968E85;
-    --accent: #B09B82;
-    --border: #33302D;
-    --underline: #5C554E;
-    --pill-active-bg: #2B2927;
+    --card-bg: #262423;
+    --border: #383431;
+    --shadow: rgba(0, 0, 0, 0.4);
   }
 
-  /* Bright Theme: Muted Mist Grey (Applied when body has .light-mode class) */
   body.light-mode {
-    --bg: #F2F4F7;
+    --bg: #F2F4F7;         /* Muted Mist Grey (Bright Mode) */
     --fg: #1F242D;
-    --body-text: #2D3440;
-    --list-text: #384150;
     --muted: #647082;
-    --accent: #4A658A;
+    --card-bg: #FFFFFF;
     --border: #DCE1E8;
-    --underline: #A3B0C2;
-    --pill-active-bg: #E2E7EE;
+    --shadow: rgba(31, 36, 45, 0.08);
   }
 
   * {
@@ -44,201 +36,195 @@
   html, body {
     background-color: var(--bg);
     color: var(--fg);
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-weight: 300;
-    font-size: 16px;
-    line-height: 1.75;
-    -webkit-font-smoothing: antialiased;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    min-height: 100vh;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    overflow-x: hidden;
   }
 
-  .wrap {
-    max-width: 660px;
+  /* Board Canvas Setup */
+  .desk-board {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 3.5rem 1.5rem 5rem;
+    min-height: 100vh;
+    padding: 2rem;
   }
 
-  /* Top Header & Divider */
-  header.bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 1.25rem;
-    margin-bottom: 2.25rem;
-    border-bottom: 1px solid var(--border);
-    transition: border-color 0.3s ease;
-  }
-
-  .home {
-    font-size: 1.15rem;
-    font-weight: 400;
-    color: var(--fg);
-    text-decoration: none;
-    letter-spacing: -0.01em;
-  }
-
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 1.75rem;
-  }
-
-  nav {
-    display: flex;
-    gap: 1.25rem;
-    font-size: 0.92rem;
-  }
-
-  nav a {
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-
-  nav a:hover {
-    color: var(--accent);
-  }
-
-  /* Theme Buttons Container */
-  .theme-group {
-    display: flex;
-    align-items: center;
+  /* Physical Light Switch in Top Right Corner */
+  .light-switch-plate {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 6px;
-    padding: 3px;
-    gap: 8px;
-    transition: border-color 0.3s ease;
+    padding: 8px 6px;
+    box-shadow: 0 4px 12px var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 100;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
   }
 
-  .theme-btn {
+  .switch-btn {
     background: transparent;
     border: none;
-    border-radius: 4px;
-    color: var(--muted);
     cursor: pointer;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 26px;
-    padding: 0;
-    transition: color 0.2s ease, background-color 0.2s ease;
+    color: var(--muted);
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
-  .theme-btn:hover {
+  .switch-btn:hover {
     color: var(--fg);
+    background: var(--border);
   }
 
-  .theme-btn svg {
-    width: 14px;
-    height: 14px;
+  .switch-btn svg {
+    width: 16px;
+    height: 16px;
     stroke: currentColor;
     fill: none;
-    stroke-width: 1.75;
+    stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
   }
 
-  /* Active Button States */
+  /* Active state highlight on the switch */
   body:not(.light-mode) #btn-dark,
   body.light-mode #btn-light {
-    background-color: var(--pill-active-bg);
-    color: var(--accent);
-  }
-
-  /* Main Bio Paragraphs */
-  .bio p {
-    margin-bottom: 1.25rem;
-    color: var(--body-text);
-  }
-
-  .bio strong {
-    font-weight: 500;
+    background: var(--border);
     color: var(--fg);
   }
 
-  /* Inline Links */
-  a.inline {
-    color: var(--fg);
-    text-decoration: underline;
-    text-decoration-color: var(--underline);
-    text-underline-offset: 4px;
-    transition: color 0.2s ease, text-decoration-color 0.2s ease;
-  }
-
-  a.inline:hover {
-    color: var(--accent);
-    text-decoration-color: var(--accent);
-  }
-
-  /* Section Blocks */
-  section {
-    margin-top: 2.5rem;
-  }
-
-  h2 {
-    font-size: 0.95rem;
-    font-weight: 400;
-    color: var(--fg);
-    margin-bottom: 1rem;
-    letter-spacing: 0.01em;
-  }
-
-  ul.clean-list {
-    list-style: none;
-  }
-
-  ul.clean-list li {
-    position: relative;
-    padding-left: 1.15rem;
-    margin-bottom: 0.75rem;
-    color: var(--list-text);
-  }
-
-  ul.clean-list li::before {
-    content: "•";
+  /* Interactive Desk Items Layout */
+  .item {
     position: absolute;
-    left: 0;
-    color: var(--muted);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
-  ul.clean-list strong {
-    font-weight: 500;
+  .item:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  /* 1. Polaroid (About) */
+  .polaroid {
+    top: 3rem;
+    left: 15%;
+    background: var(--card-bg);
+    padding: 10px 10px 25px 10px;
+    box-shadow: 0 8px 24px var(--shadow);
+    border: 1px solid var(--border);
+    width: 160px;
+    transform: rotate(-3deg);
+  }
+  .polaroid img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    filter: grayscale(20%);
+  }
+  .polaroid span {
+    display: block;
+    text-align: center;
+    margin-top: 8px;
+    font-size: 0.95rem;
     color: var(--fg);
   }
 
-  /* Elsewhere / Links Row */
-  .links-row {
-    margin-top: 2.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.25rem;
-    font-size: 0.92rem;
-    transition: border-color 0.3s ease;
+  /* 2. Central ID Card / Nameplate */
+  .id-card {
+    top: 8rem;
+    left: 38%;
+    background: var(--card-bg);
+    padding: 2rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 30px var(--shadow);
+    width: 300px;
+    text-align: center;
+    transform: rotate(1deg);
   }
-
-  /* Footer */
-  footer.foot {
-    margin-top: 3rem;
+  .id-card h1 {
+    font-size: 1.35rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+  .id-card p {
     font-size: 0.85rem;
     color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
 
-  @media (max-width: 520px) {
-    .wrap {
-      padding: 2.5rem 1.25rem 4rem;
+  /* 3. Notebook (Blog) */
+  .notebook {
+    bottom: 4rem;
+    left: 35%;
+    background: #4A658A;
+    color: #FFF;
+    padding: 2.5rem 2rem;
+    border-radius: 4px;
+    box-shadow: 0 12px 35px var(--shadow);
+    width: 200px;
+    text-align: center;
+    transform: rotate(-2deg);
+  }
+  .notebook span {
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  /* 4. Philosophy Note */
+  .note-sticky {
+    top: 5rem;
+    right: 25%;
+    background: var(--card-bg);
+    padding: 1rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 6px 20px var(--shadow);
+    transform: rotate(4deg);
+    font-size: 0.9rem;
+  }
+
+  /* Responsive layout adjustment for smaller screens */
+  @media (max-width: 768px) {
+    .desk-board {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      padding: 5rem 1rem 3rem 1rem;
     }
-    header.bar {
-      flex-wrap: wrap;
-      gap: 0.75rem;
+    .item {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+      transform: none !important;
+      width: 100%;
+      max-width: 280px;
+    }
+    .light-switch-plate {
+      top: 1rem;
+      right: 1rem;
     }
   }
 </style>
-
 <script>
-  // Apply saved theme immediately before the page renders
+  // Instant theme loader to prevent any flash on load
   if (localStorage.getItem('theme') === 'light') {
     document.documentElement.style.backgroundColor = '#F2F4F7';
   } else {
@@ -247,75 +233,45 @@
 </script>
 </head>
 <body>
-  <div class="wrap">
-    <header class="bar">
-      <a class="home" href="./">anuj sangwan</a>
-      <div class="nav-right">
-        <nav>
-          <a href="blog/">writing</a>
-          <a href="about/">about</a>
-          <a href="now/">now</a>
-        </nav>
 
-        <!-- Theme Toggle Group -->
-        <div class="theme-group" role="group" aria-label="Theme switcher">
-          <button type="button" class="theme-btn" id="btn-dark" aria-label="Dark theme" title="Dark theme">
-            <svg viewBox="0 0 24 24">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
-          </button>
-          <button type="button" class="theme-btn" id="btn-light" aria-label="Bright theme" title="Bright theme">
-            <svg viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="4"></circle>
-              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </header>
+  <div class="desk-board">
+    <!-- Physical Light Switch (Top Right) -->
+    <div class="light-switch-plate" role="group" aria-label="Theme Switcher">
+      <button type="button" class="switch-btn" id="btn-dark" title="Dark Mode (Warm Charcoal)">
+        <!-- Moon Icon -->
+        <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+      <button type="button" class="switch-btn" id="btn-light" title="Bright Mode (Muted Mist Grey)">
+        <!-- Sun Icon -->
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+      </button>
+    </div>
 
-    <main>
-      <div class="bio">
-        <p>hi, i'm <strong>anuj</strong>. i'm drawn to quiet routines, clear thinking, and understanding how things actually work beneath the surface.</p>
-        
-        <p>i spend my time solving <strong>basic quant problems</strong>, going on long runs, and writing essays about discipline, human psychology, and <em>whatever i can't stop thinking about</em> — benches, pigeons, grocery stores at 2am — roughly in the order it happens.</p>
-      </div>
+    <!-- 1. Clickable Polaroid -> links to about/ -->
+    <a href="about/" class="item polaroid">
+      <img src="assets/me.jpg" alt="Anuj Sangwan">
+      <span>about</span>
+    </a>
 
-      <section>
-        <h2>Things I enjoy:</h2>
-        <ul class="clean-list">
-          <li><strong>Long-distance running:</strong> Early mornings, steady pacing, and the clarity that comes after the first few kilometres.</li>
-          <li><strong>Math &amp; quant puzzles:</strong> Probability, mental math, and clean problem-solving without unnecessary noise.</li>
-          <li><strong>Reflective writing:</strong> Unpacking childhood habits, self-awareness, and everyday philosophy on my <a class="inline" href="blog/">writing</a> page.</li>
-          <li><strong>Cinema &amp; music:</strong> Logging films on <a class="inline" href="#">letterboxd</a> and curating late-night playlists on <a class="inline" href="#">spotify</a>.</li>
-        </ul>
-      </section>
+    <!-- 2. Central ID Card -->
+    <div class="item id-card">
+      <h1>Anuj Sangwan</h1>
+      <p>Hacker &amp; Maker</p>
+    </div>
 
-      <section>
-        <h2>Right now:</h2>
-        <ul class="clean-list">
-          <li>Building this personal corner of the internet slowly, by hand.</li>
-          <li>Focusing on consistency over intensity—in running, reading, and work.</li>
-          <li>More details on my <a class="inline" href="now/">now</a> page.</li>
-        </ul>
-      </section>
+    <!-- 3. Clickable Notebook -> links to writing/blog -->
+    <a href="blog/" class="item notebook">
+      <span>writing</span>
+    </a>
 
-      <div class="links-row">
-        <a class="inline" href="#">instagram</a>
-        <a class="inline" href="#">letterboxd</a>
-        <a class="inline" href="#">spotify</a>
-        <a class="inline" href="#">x</a>
-        <a class="inline" href="mailto:hi@example.com">email</a>
-      </div>
-    </main>
-
-    <footer class="foot">
-      no cookies, no tracking, no newsletter popup. made by hand, slowly.
-    </footer>
+    <!-- 4. Clickable Note -> links to now/ -->
+    <a href="now/" class="item note-sticky">
+      <span>philosophy &amp; now ↗</span>
+    </a>
   </div>
 
   <script>
-    // Apply saved theme on full page load
+    // Theme switching logic with instant application & storage
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
       document.body.classList.add('light-mode');
@@ -327,11 +283,13 @@
     btnDark.addEventListener('click', () => {
       document.body.classList.remove('light-mode');
       localStorage.setItem('theme', 'dark');
+      document.documentElement.style.backgroundColor = '#1C1B1A';
     });
 
     btnLight.addEventListener('click', () => {
       document.body.classList.add('light-mode');
       localStorage.setItem('theme', 'light');
+      document.documentElement.style.backgroundColor = '#F2F4F7';
     });
   </script>
 </body>
