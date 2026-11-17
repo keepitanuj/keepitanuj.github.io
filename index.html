@@ -1,69 +1,172 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>anuj sangwan</title>
-<meta name="description" content="anuj sangwan writes about random things.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap">
-<link rel="stylesheet" href="assets/style.css">
-<style>
-  :root {
-    --bg: #F2F4F7;
-    --fg: #1F242D;
-    --muted: #5A6475;
-    --accent: #4A658A;
-    --border: #DCE1E8;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>anuj sangwan</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #b3b3b3;
+            --heading-color: #e0e0e0;
+            --link-color: #e0e0e0;
+            --link-hover: #ffffff;
+        }
 
-  html, body {
-    background-color: #F2F4F7 !important;
-    color: #1F242D !important;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
+        [data-theme="light"] {
+            --bg-color: #fbfbfa;
+            --text-color: #666666;
+            --heading-color: #222222;
+            --link-color: #222222;
+            --link-hover: #000000;
+        }
 
-  a {
-    color: #1F242D;
-    text-decoration-color: #9AA6B8;
-  }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 60px 20px;
+            margin: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-  a:hover {
-    color: #4A658A !important;
-  }
+        .container {
+            width: 100%;
+            max-width: 650px;
+        }
 
-  .clock, .foot, .ph, .elsewhere li:first-child {
-    color: #5A6475 !important;
-  }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 60px;
+        }
 
-  .bar, .foot, .elsewhere {
-    border-color: #DCE1E8 !important;
-  }
-</style>
+        .logo {
+            font-family: "Georgia", serif;
+            font-size: 1.5rem;
+            color: var(--heading-color);
+            text-decoration: none;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover, nav button:hover {
+            color: var(--link-hover);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin-left: 20px;
+            padding: 0;
+            vertical-align: middle;
+        }
+
+        main p {
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+
+        main p b, main p strong {
+            color: var(--heading-color);
+            font-weight: 600;
+        }
+
+        .enjoy-section {
+            margin-top: 40px;
+        }
+
+        .enjoy-section h3 {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 1.05rem;
+            color: var(--text-color);
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            line-height: 1.7;
+        }
+
+        li {
+            margin-bottom: 15px;
+            font-size: 1.02rem;
+        }
+
+        li strong {
+            color: var(--heading-color);
+            font-weight: 600;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        a:hover {
+            color: var(--link-hover);
+        }
+    </style>
 </head>
-<body>
-<header class="bar">
-  <a class="home" href="./">anuj sangwan</a>
-  <nav><a href="blog/">writing</a><a href="about/">about</a><a href="now/">now</a></nav>
-  <span class="clock" data-clock></span>
-</header>
-<main>
-<p class="intro">hi, i'm anuj. i write about basic quant problems, running, discipline, philosophy and <em>whatever i can't stop thinking about</em> — benches, pigeons, grocery stores at 2am — roughly in the order it happens.</p>
+<body data-theme="dark">
 
-<ul class="elsewhere">
-  <li>elsewhere</li>
-  <li><a href="#">instagram <span>@<span class="ph">handle</span> ↗</span></a></li>
-  <li><a href="#">letterboxd <span>@<span class="ph">handle</span> ↗</span></a></li>
-  <li><a href="#">spotify <span><span class="ph">profile</span> ↗</span></a></li>
-  <li><a href="#">x <span>@<span class="ph">handle</span> ↗</span></a></li>
-  <li><a href="#">email <span><span class="ph">hi@…</span></span></a></li>
-</ul>
+    <div class="container">
+        <!-- Header Navigation matching your blog structure -->
+        <header>
+            <a href="/anuj" class="logo">anuj sangwan</a>
+            <nav>
+                <a href="/blog">writing</a>
+                <a href="/about">about</a>
+                <a href="/now">now</a>
+                <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">☽</button>
+            </nav>
+        </header>
 
-<ol class="timeline" data-timeline></ol>
-<p class="timeline-end"></p>
-</main>
-<footer class="foot">no cookies, no tracking, no newsletter popup. made by hand, slowly.</footer>
-<script src="assets/site.js"></script>
+        <!-- Main Content Area -->
+        <main>
+            <p>hi, i'm anuj. i'm drawn to quiet routines, clear thinking, and understanding how things actually work beneath the surface.</p>
+            
+            <p>i spend my time solving <strong>basic quant problems</strong>, going on long runs, and writing essays about discipline, human psychology, and whatever i can't stop thinking about — benches, pigeons, grocery stores at 2am — roughly in the order it happens.</p>
+
+            <div class="enjoy-section">
+                <h3>Things I enjoy:</h3>
+                <ul>
+                    <li><strong>Long-distance running:</strong> Early mornings, steady pacing, and the clarity that comes after the first few kilometres.</li>
+                    <li><strong>Math & quant puzzles:</strong> mental math, and clean problem-solving without unnecessary noise.</li>
+                    <li><strong>Reflective writing:</strong> Unpacking childhood habits, self-awareness, and everyday philosophy on my <a href="/blog">writing page</a>.</li>
+                    <li><strong>Cinema & music:</strong> Logging films on <a href="https://letterboxd.com" target="_blank">letterboxd</a> and curating late-night playlists on <a href="https://spotify.com" target="_blank">spotify</a>.</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const toggleBtn = document.getElementById('themeToggle');
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                toggleBtn.textContent = '☼';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                toggleBtn.textContent = '☽';
+            }
+        }
+    </script>
 </body>
 </html>
