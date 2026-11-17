@@ -9,42 +9,38 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap">
 <link rel="stylesheet" href="assets/style.css">
-</head>
-<body>
-<header class="bar">
-  <a class="home" href="./">anuj sangwan</a>
-  <nav><a href="blog/">writing</a><a href="about/">about</a><a href="now/">now</a></nav>
-  <span class="clock" data-clock></span>
-</header>
-<main>
-<p class="intro">hi, i'm anuj. i write about basic quant problems, running, discipline, philosophy and <em>whatever i can't stop thinking about</em> — benches, pigeons, grocery stores at 2am — roughly in the order it happens.</p>
+<style>
+  :root {
+    --bg: #F2F4F7;
+    --fg: #1F242D;
+    --muted: #5A6475;
+    --accent: #4A658A;
+    --border: #DCE1E8;
+  }
 
-<ul class="elsewhere">
-  <li>elsewhere</li>
-  <li><a href="#">instagram <span>@<span class="ph">handle</span> ↗</span></a></li>
-  <li><a href="#">letterboxd <span>@<span class="ph">handle</span> ↗</span></a></li>
-  <li><a href="#">spotify <span><span class="ph">profile</span> ↗</span></a></li>
-  <li><a href="#">x <span>@<span class="ph">handle</span> ↗</span></a></li>
-  <li><a href="#">email <span><span class="ph">hi@…</span></span></a></li>
-</ul>
+  html, body {
+    background-color: #F2F4F7 !important;
+    color: #1F242D !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
 
-<ol class="timeline" data-timeline></ol>
-<p class="timeline-end"></p>
-</main>
-<footer class="foot">no cookies, no tracking, no newsletter popup. made by hand, slowly.</footer>
-<script src="assets/site.js"></script>
-</body>
-</html><!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>anuj sangwan</title>
-<meta name="description" content="anuj sangwan writes about random things.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap">
-<link rel="stylesheet" href="assets/style.css">
+  a {
+    color: #1F242D;
+    text-decoration-color: #9AA6B8;
+  }
+
+  a:hover {
+    color: #4A658A !important;
+  }
+
+  .clock, .foot, .ph, .elsewhere li:first-child {
+    color: #5A6475 !important;
+  }
+
+  .bar, .foot, .elsewhere {
+    border-color: #DCE1E8 !important;
+  }
+</style>
 </head>
 <body>
 <header class="bar">
