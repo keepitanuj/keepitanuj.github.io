@@ -3,63 +3,93 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Anuj Sangwan · Notebook</title>
+<title>anuj sangwan</title>
 <meta name="description" content="Anuj Sangwan: writing, running, experience, discipline, quant and other random things.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="home.css">
 </head>
 <body>
-<div class="wrap">
+<div class="page">
 
-  <div class="topbar">
-    <span>Anuj Sangwan</span>
-    <span><a href="about/">About</a> · <a href="blog/">Blog</a> · <a href="now/">Now</a></span>
+  <header class="top">
+    <a href="index.html">anuj sangwan</a>
+    <nav aria-label="Main">
+      <a href="blog/">writing</a>
+      <a href="about/">about</a>
+      <a href="now/">now</a>
+    </nav>
+    <span id="clock">for anuj — probably around</span>
+  </header>
+
+  <div class="intro">
+    <h1>contents</h1>
+    <p class="lede">write • running • experience • discipline • quant + other random things.</p>
   </div>
 
-  <div class="layout">
-    <main>
-      <h1>Contents</h1>
-      <p class="lede">Write • Running • Experience • Discipline • Quant, and other random things.</p>
-      <ol class="toc">
-        <li><a href="blog/"><span class="num">01</span><span class="name">Writing</span><span class="dots"></span><span class="count">[n] posts</span></a></li>
-        <li><a href="#"><span class="num">02</span><span class="name">Running</span><span class="dots"></span><span class="count">[n] posts</span></a></li>
-        <li><a href="#"><span class="num">03</span><span class="name">Philosophy</span><span class="dots"></span><span class="count">[n] essays</span></a></li>
-        <li><a href="trapezium-diagonals.html"><span class="num">04</span><span class="name">Quant notes &amp; mental maps</span><span class="dots"></span><span class="count">1 note</span></a></li>
-        <li><a href="#"><span class="num">05</span><span class="name">Reading</span><span class="dots"></span><span class="count">[n] books</span></a></li>
-        <li><a href="#"><span class="num">06</span><span class="name">Gallery</span><span class="dots"></span><span class="count">[n] photos</span></a></li>
-      </ol>
-    </main>
+  <main class="timeline">
 
-    <aside class="now" aria-labelledby="now-title">
-      <h2 class="label" id="now-title"><a href="now/" style="color:inherit">Now</a></h2>
-      <dl>
-        <div><dt>Reading</dt><dd>[Book title]</dd></div>
-        <div><dt>Running</dt><dd>[Current goal or race]</dd></div>
-        <div><dt>Studying</dt><dd>[Topic]</dd></div>
-        <div><dt>Latest post</dt><dd><a href="#">[Post title]</a></dd></div>
+    <section class="entry" aria-label="Now">
+      <span class="when">today</span>
+      <dl class="now">
+        <dt>reading</dt><dd>The God of Small Things</dd>
+        <dt>running</dt><dd>5 km daily, working towards 21 km</dd>
       </dl>
-    </aside>
-  </div>
+      <p class="more"><a href="now/">more on now →</a></p>
+    </section>
 
-  <article class="essay">
-    <p class="label">Featured · Running &amp; maths</p>
-    <h2>The slow half of the average</h2>
-    <div class="prose">
-      <p>Run the first 5 km of a 10 km race at 12 km/h and the second 5 km at 10 km/h. Your average speed is not 11. It is 10.9.</p>
-      <p>The reason is quiet but important. Time, not distance, is what a race charges you, and slow kilometres take longer to run, so they weigh more in the average. Averaged over equal distances, speed is the harmonic mean, which always sits below the ordinary one. Pace, which is time per kilometre, averages the way you expect: 5:00 and 6:00 give 5:30. The two are the same fact in different clothes, and only one of them lets you do the sum in your head.</p>
-      <p class="formula">average speed = 2ab / (a + b) = 2 × 12 × 10 / 22 ≈ 10.91 km/h</p>
-      <p>There is a deeper version of the same idea. In a simple model where the cost of going faster grows more than proportionally, Jensen's inequality says the cheapest way to cover a distance in a fixed time is to hold the same speed throughout. Surges are expensive, and a fast stretch rarely buys back what a slow one spends. Hills, wind and heat all bend the model, but it is a good first map.</p>
-      <p>What I like is that running makes this felt rather than merely known. You can solve it on paper in a minute and still learn it properly at kilometre eight, when the early enthusiasm sends its invoice. The habit I take from it is a small one: when a plan seems to need a heroic stretch to work, I check whether steady effort does the same job.</p>
-    </div>
-  </article>
+    <section class="entry">
+      <span class="when">01</span>
+      <a href="#" class="name">running</a>
+    </section>
+    <section class="entry">
+      <span class="when">02</span>
+      <a href="#" class="name">philosophy</a>
+    </section>
+    <section class="entry">
+      <span class="when">03</span>
+      <a href="trapezium-diagonals.html" class="name">quant notes &amp; mental maps</a><span class="meta">1 note</span>
+    </section>
+    <section class="entry">
+      <span class="when">04</span>
+      <a href="#" class="name">reading</a>
+    </section>
 
-  <div class="footer">
-    <span><a href="https://www.instagram.com/anuj_191025/">Instagram</a> · <a href="https://github.com/keepitanuj">GitHub</a> · <a href="mailto:anujsangwan4578@gmail.com">Email</a></span>
-    <span>© 2026 Anuj Sangwan</span>
-  </div>
+    <article class="entry essay">
+      <span class="when">essay</span>
+      <h2>the slow half of the average</h2>
+      <div class="prose">
+        <p>Run the first 5 km of a 10 km race at 12 km/h and the second 5 km at 10 km/h. Your average speed is not 11. It is 10.9.</p>
+        <p>The reason is quiet but important. Time, not distance, is what a race charges you, and slow kilometres take longer to run, so they weigh more in the average. Averaged over equal distances, speed is the harmonic mean, which always sits below the ordinary one. Pace, which is time per kilometre, averages the way you expect: 5:00 and 6:00 give 5:30. The two are the same fact in different clothes, and only one of them lets you do the sum in your head.</p>
+        <p class="formula">average speed = 2ab / (a + b) = 2 × 12 × 10 / 22 ≈ 10.91 km/h</p>
+        <p>There is a deeper version of the same idea. In a simple model where the cost of going faster grows more than proportionally, Jensen's inequality says the cheapest way to cover a distance in a fixed time is to hold the same speed throughout. Surges are expensive, and a fast stretch rarely buys back what a slow one spends. Hills, wind and heat all bend the model, but it is a good first map.</p>
+        <p>What I like is that running makes this felt rather than merely known. You can solve it on paper in a minute and still learn it properly at kilometre eight, when the early enthusiasm sends its invoice. The habit I take from it is a small one: when a plan seems to need a heroic stretch to work, I check whether steady effort does the same job.</p>
+      </div>
+    </article>
+
+  </main>
+
+  <footer class="foot">
+    <span><a href="https://www.instagram.com/anuj_191025/">instagram</a> · <a href="https://github.com/keepitanuj">github</a> · <a href="mailto:anujsangwan4578@gmail.com">email</a></span>
+    <span>© 2026 anuj sangwan</span>
+  </footer>
 
 </div>
+<script>
+/* Shows the current time in India, like "14:40 for anuj — probably around".
+   To change the time zone, replace Asia/Kolkata. */
+(function(){
+  var el=document.getElementById('clock');
+  if(!el||!window.Intl)return;
+  function tick(){
+    try{
+      var t=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',timeZone:'Asia/Kolkata'});
+      el.textContent=t+' for anuj — probably around';
+    }catch(e){}
+  }
+  tick();setInterval(tick,30000);
+})();
+</script>
 </body>
 </html>
