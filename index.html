@@ -11,7 +11,6 @@
 
 <style>
   :root {
-    /* Minted Grey (Bright Theme) */
     --bg: #e5ece8;
     --bg-dot: #d5dfd9;
     --ink: #222524;
@@ -25,7 +24,6 @@
   }
 
   [data-theme="dark"] {
-    /* Warm Charcoal (Dark Theme) */
     --bg: #22211f;
     --bg-dot: #2d2b28;
     --ink: #ebe7e0;
@@ -56,7 +54,6 @@
     user-select: none;
   }
 
-  /* Theme Switcher Pill (Top Right like screenshot) */
   .theme-toggle {
     position: fixed;
     top: 20px;
@@ -94,17 +91,16 @@
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   }
 
-  /* Desk Canvas */
   .desk {
     position: relative;
     width: 100%;
     max-width: 1320px;
     height: 100vh;
-    min-height: 700px;
+    min-height: 720px;
     margin: 0 auto;
+    perspective: 1000px;
   }
 
-  /* Generic Desk Item Styling */
   .desk-item {
     position: absolute;
     cursor: pointer;
@@ -117,10 +113,8 @@
   }
   .desk-item:hover {
     z-index: 20;
-    filter: brightness(1.02);
   }
 
-  /* Masking Tape Effect */
   .tape {
     width: 68px;
     height: 18px;
@@ -135,13 +129,58 @@
     font-family: 'Caveat', cursive;
     font-size: 1.25rem;
     color: var(--muted);
-    margin-top: 6px;
+    margin-top: 4px;
     letter-spacing: 0.3px;
   }
 
-  /* 1. CENTER CALLING CARD */
+  /* 1. ABOUT ME POLAROID PHOTO (Top Left) */
+  .item-about {
+    top: 6%;
+    left: 21%;
+    transform: rotate(-5deg);
+    z-index: 12;
+  }
+  .item-about:hover {
+    transform: rotate(-1deg) translateY(-6px);
+  }
+  .polaroid {
+    background: #faf9f5;
+    padding: 10px 10px 14px;
+    border-radius: 3px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    width: 146px;
+    text-align: center;
+  }
+  .polaroid-img-box {
+    width: 124px;
+    height: 134px;
+    background: #d8dfdb;
+    overflow: hidden;
+    position: relative;
+  }
+  .polaroid-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.06);
+    transition: filter 0.3s ease;
+    display: block;
+  }
+  .item-about:hover .polaroid-img-box img {
+    filter: grayscale(20%) contrast(1.03);
+  }
+  .polaroid-caption {
+    font-family: 'Caveat', cursive;
+    font-size: 1.25rem;
+    color: #2b2e2c;
+    margin-top: 8px;
+    line-height: 1;
+  }
+
+  /* 2. CENTER CALLING CARD */
   .name-card-wrap {
-    top: 42%;
+    top: 43%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
@@ -206,46 +245,67 @@
     transform: rotate(-2deg);
   }
 
-  /* 2. SHAKTIMAAN (Left Side) */
+  /* 3. SHAKTIMAAN CUTOUT */
   .item-shaktimaan {
-    top: 28%;
-    left: 8%;
-    transform: rotate(-4deg);
+    top: 32%;
+    left: 6%;
     z-index: 15;
+    transform-style: preserve-3d;
   }
   .item-shaktimaan:hover {
-    transform: rotate(0deg) scale(1.06);
+    transform: scale(1.06);
   }
-  .shaktimaan-badge {
-    width: 112px;
-    height: 112px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #b8292f, #6e1115);
-    border: 4px solid #d4af37;
-    box-shadow: var(--shadow);
-    display: grid;
-    place-items: center;
-    position: relative;
-    overflow: hidden;
+  .shaktimaan-cutout {
+    width: 115px;
+    height: 165px;
+    object-fit: contain;
+    background: transparent;
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
+    transform-style: preserve-3d;
+    display: block;
   }
-  /* Shaktimaan Flight & Spin Animation */
-  @keyframes shaktimaanFly {
-    0%   { transform: translate(0, 0) rotate(0deg) scale(1); filter: drop-shadow(0 0 0px gold); }
-    15%  { transform: translate(60px, -90px) rotate(720deg) scale(1.15); filter: drop-shadow(0 0 18px #ffd700); }
-    35%  { transform: translate(480px, -130px) rotate(1800deg) scale(1.2); filter: drop-shadow(0 0 24px #ffae00); }
-    55%  { transform: translate(780px, 140px) rotate(2880deg) scale(1.1); filter: drop-shadow(0 0 22px #ffd700); }
-    75%  { transform: translate(320px, 210px) rotate(3960deg) scale(1.15); filter: drop-shadow(0 0 18px #ffae00); }
-    90%  { transform: translate(-20px, 40px) rotate(4680deg) scale(1.05); }
-    100% { transform: translate(0, 0) rotate(5040deg) scale(1); filter: drop-shadow(0 0 0px gold); }
+
+  @keyframes shaktimaanTornado {
+    0% {
+      transform: translate(0, 0) rotateY(0deg) scale(1);
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));
+    }
+    12% {
+      transform: translate(0, -18px) rotateY(1080deg) scale(1.08);
+      filter: drop-shadow(0 0 14px rgba(255, 200, 40, 0.85));
+    }
+    32% {
+      transform: translate(420px, -140px) rotateY(3240deg) scale(1.12);
+      filter: drop-shadow(0 0 22px rgba(255, 190, 20, 0.95));
+    }
+    55% {
+      transform: translate(820px, 90px) rotateY(5760deg) scale(1.05);
+      filter: drop-shadow(0 0 22px rgba(255, 190, 20, 0.95));
+    }
+    78% {
+      transform: translate(340px, 190px) rotateY(7920deg) scale(1.08);
+      filter: drop-shadow(0 0 16px rgba(255, 200, 40, 0.85));
+    }
+    92% {
+      transform: translate(0, -10px) rotateY(9000deg) scale(1.02);
+      filter: drop-shadow(0 8px 12px rgba(0,0,0,0.25));
+    }
+    100% {
+      transform: translate(0, 0) rotateY(9360deg) scale(1);
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));
+    }
+  }
+
+  .shaktimaan-flying .shaktimaan-cutout {
+    animation: shaktimaanTornado 3.4s cubic-bezier(0.4, 0.05, 0.6, 0.95) forwards;
   }
   .shaktimaan-flying {
-    animation: shaktimaanFly 3.2s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards;
     z-index: 999 !important;
   }
 
-  /* 3. QUANT NOTES (Bottom Left) */
+  /* 4. QUANT NOTES */
   .item-quant {
-    bottom: 11%;
+    bottom: 8%;
     left: 11%;
     transform: rotate(3deg);
   }
@@ -283,10 +343,10 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.08);
   }
 
-  /* 4. PHILOSOPHY - ARISTOTLE HEAD (Top Right) */
+  /* 5. PHILOSOPHY - ARISTOTLE HEAD */
   .item-philosophy {
     top: 8%;
-    right: 25%;
+    right: 24%;
     transform: rotate(3deg);
   }
   .item-philosophy:hover {
@@ -298,10 +358,10 @@
     filter: drop-shadow(0 8px 14px rgba(0,0,0,0.18));
   }
 
-  /* 5. GALLERY - DSLR CAMERA (Middle Right) */
+  /* 6. GALLERY - DSLR CAMERA */
   .item-gallery {
     top: 34%;
-    right: 11%;
+    right: 10%;
     transform: rotate(5deg);
   }
   .item-gallery:hover {
@@ -353,9 +413,9 @@
     background: #c7ccc9;
   }
 
-  /* 6. BLOG NOTEBOOK (Bottom Middle) */
+  /* 7. BLOG NOTEBOOK */
   .item-blog {
-    bottom: 6%;
+    bottom: 5%;
     left: 48%;
     transform: translateX(-50%) rotate(-3deg);
   }
@@ -383,9 +443,9 @@
     transform: rotate(-2deg);
   }
 
-  /* 7. PHONE WITH APPS (Bottom Right) */
+  /* 8. PHONE WITH APPS */
   .item-phone {
-    bottom: 7%;
+    bottom: 6%;
     right: 21%;
     transform: rotate(4deg);
     cursor: default;
@@ -458,7 +518,7 @@
     text-align: center;
   }
 
-  /* 8. BOOK ICON - READING LIST (Lower Right Corner) */
+  /* 9. BOOK ICON */
   .item-books {
     bottom: 6%;
     right: 4%;
@@ -496,7 +556,7 @@
     opacity: 0.85;
   }
 
-  /* Clean Modal for Sections (Quant, Philosophy, Gallery, Books) */
+  /* Modal */
   .modal-backdrop {
     position: fixed;
     inset: 0;
@@ -550,7 +610,6 @@
     margin-bottom: 6px;
   }
 
-  /* Responsive Mobile Layout (Stacks neatly on phones) */
   @media (max-width: 960px) {
     .desk {
       height: auto;
@@ -574,7 +633,6 @@
 </head>
 <body>
 
-  <!-- Top-Right Theme Switcher -->
   <div class="theme-toggle" title="Switch Theme">
     <button class="theme-btn active" id="btn-light" aria-label="Minted Grey Theme">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -590,20 +648,24 @@
 
   <main class="desk">
 
-    <!-- 1. SHAKTIMAAN ICON (Left Side - Click to fly!) -->
-    <div class="desk-item item-shaktimaan" id="shaktimaan" title="Click to summon Shaktimaan!">
-      <div class="shaktimaan-badge">
-        <!-- Custom Shaktimaan Emblem & Figure SVG -->
-        <svg width="84" height="84" viewBox="0 0 100 100">
-          <polygon points="50,8 61,35 90,35 66,52 75,80 50,63 25,80 34,52 10,35 39,35" fill="#ffd700" opacity="0.9"/>
-          <circle cx="50" cy="48" r="22" fill="#8b181d" stroke="#ffd700" stroke-width="2.5"/>
-          <text x="50" y="56" text-anchor="middle" fill="#ffd700" font-family="Georgia, serif" font-weight="bold" font-size="26">S</text>
-        </svg>
+    <!-- 1. ABOUT ME POLAROID PHOTO (Top Left - Now linked to me.jpeg) -->
+    <div class="desk-item item-about" data-modal="about" title="About Me">
+      <div class="tape" style="margin-bottom: -8px;"></div>
+      <div class="polaroid">
+        <div class="polaroid-img-box">
+          <img src="me.jpeg" alt="Anuj Sangwan">
+        </div>
+        <div class="polaroid-caption">about me</div>
       </div>
+    </div>
+
+    <!-- 2. SHAKTIMAAN CUTOUT -->
+    <div class="desk-item item-shaktimaan" id="shaktimaan" title="Click to spin Shaktimaan!">
+      <img class="shaktimaan-cutout" src="shaktimaan.png" alt="Shaktimaan" onerror="this.outerHTML='<div style=\'width:105px;height:140px;border:1.5px dashed #8b181d;border-radius:8px;display:grid;place-items:center;text-align:center;font-family:Caveat,cursive;font-size:1.05rem;color:#8b181d;padding:8px;\'>upload shaktimaan.png</div>';">
       <span class="hand-label">shaktimaan ↻</span>
     </div>
 
-    <!-- 2. CENTER CALLING CARD -->
+    <!-- 3. CENTER CALLING CARD -->
     <div class="desk-item name-card-wrap">
       <div class="name-card">
         <h1>Anuj Sangwan</h1>
@@ -624,27 +686,21 @@
       </div>
     </div>
 
-    <!-- 3. PHILOSOPHY - ARISTOTLE HEAD (Top Right) -->
+    <!-- 4. PHILOSOPHY -->
     <div class="desk-item item-philosophy" data-modal="philosophy">
       <div class="aristotle-cutout">
-        <!-- Monochrome Bust Illustration -->
         <svg viewBox="0 0 140 160" width="124" height="138">
           <defs>
             <filter id="paperShadow">
               <feDropShadow dx="0" dy="3" stdDeviation="2" flood-opacity="0.25"/>
             </filter>
           </defs>
-          <!-- White sticker outline -->
           <path d="M70,12 C45,12 32,30 34,54 C35,66 38,76 42,84 C32,94 22,108 20,136 L120,136 C118,108 108,94 98,84 C102,76 105,66 106,54 C108,30 95,12 70,12 Z" fill="#f7f6f2" filter="url(#paperShadow)"/>
-          <!-- Bust silhouette -->
           <path d="M70,18 C50,18 40,34 41,54 C42,64 46,72 50,78 C49,88 56,96 70,96 C84,96 91,88 90,78 C94,72 98,64 99,54 C100,34 90,18 70,18 Z" fill="#3a3c3b"/>
-          <!-- Beard & Hair texture -->
           <path d="M48,64 C48,84 56,98 70,98 C84,98 92,84 92,64 C86,72 78,74 70,74 C62,74 54,72 48,64 Z" fill="#232524"/>
-          <!-- Eyes & Brow -->
           <path d="M53,48 Q60,45 66,48 M74,48 Q80,45 87,48" stroke="#d8dad9" stroke-width="2" fill="none"/>
           <circle cx="60" cy="51" r="2" fill="#d8dad9"/>
           <circle cx="80" cy="51" r="2" fill="#d8dad9"/>
-          <!-- Draped Toga Shoulders -->
           <path d="M26,132 C28,108 42,96 56,94 L70,108 L84,94 C98,96 112,108 114,132 Z" fill="#4c4f4d"/>
         </svg>
       </div>
@@ -652,12 +708,11 @@
       <span class="hand-label">philosophy</span>
     </div>
 
-    <!-- 4. GALLERY - DSLR CAMERA (Middle Right) -->
+    <!-- 5. GALLERY -->
     <div class="desk-item item-gallery" data-modal="gallery">
       <div class="dslr-body">
         <div class="dslr-viewfinder"></div>
         <div class="dslr-screen">
-          <!-- Tiny Sun & Hills inside LCD -->
           <div style="width:14px;height:14px;border-radius:50%;background:#fff3c4;position:absolute;top:12px;right:16px;"></div>
         </div>
         <div class="dslr-controls">
@@ -669,7 +724,7 @@
       <span class="hand-label">gallery</span>
     </div>
 
-    <!-- 5. QUANT NOTES (Bottom Left) -->
+    <!-- 6. QUANT NOTES -->
     <div class="desk-item item-quant" data-modal="quant">
       <div class="quant-pad">
         <div class="math-scribble">
@@ -682,25 +737,17 @@
       </div>
     </div>
 
-    <!-- 6. BLOG NOTEBOOK (Bottom Middle - Links to blog/) -->
+    <!-- 7. BLOG NOTEBOOK -->
     <a class="desk-item item-blog" href="blog/">
       <div class="blog-notebook">
         <div class="blog-sticker">blog</div>
       </div>
     </a>
 
-    <!-- 7. PHONE ICON WITH INSTA, GITHUB, GMAIL (Bottom Right) -->
+    <!-- 8. PHONE -->
     <div class="desk-item item-phone">
       <div class="phone-frame">
         <div class="phone-screen">
           <div class="phone-time" id="phone-clock">09:46</div>
-
           <div class="phone-apps">
-            <!-- Instagram -->
-            <a class="app-icon app-insta" href="https://instagram.com/anuj_191025" target="_blank" rel="noopener" title="Instagram (@anuj_191025)">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-              </svg>
-            </a>
-
-            <!-- GitHub -->
+            <a class="app-icon app-insta" href="https://instagram.com/anuj_191025" target
