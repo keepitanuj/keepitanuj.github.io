@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trapezium and its diagonals · Anuj Sangwan</title>
+<meta name="description" content="Quant note: a trapezium diagonal problem and a quick options-based solution.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap narrow note">
+
+  <div class="topbar">
+    <span><a href="index.html">Anuj Sangwan</a> / <a href="index.html">Quant notes</a> / Geometry</span>
+    <span><a href="about/">About</a> · <a href="blog/">Blog</a> · <a href="now/">Now</a></span>
+  </div>
+
+  <h1>Trapezium and its diagonals</h1>
+  <p class="meta">Q.8 · Geometry</p>
+
+  <section class="section">
+    <h2 class="label">Problem</h2>
+    <p class="prose large" style="margin:0 0 24px">ABCD is a trapezium in which AB is parallel to DC and its diagonals intersect at P. If AP = (3x − 1) cm, PC = (5x − 3) cm, BP = (2x + 1) cm and PD = (6x − 5) cm, then the length of DB is:</p>
+    <ul class="options">
+      <li>(a) 10 cm</li>
+      <li>(b) 16 cm</li>
+      <li>(c) 14 cm</li>
+      <li>(d) 12 cm</li>
+    </ul>
+    <svg class="diagram" viewBox="0 0 360 200" role="img" aria-label="Trapezium ABCD with AB parallel to DC. Diagonals AC and BD meet at P. AP is 3x minus 1, PC is 5x minus 3, BP is 2x plus 1, PD is 6x minus 5.">
+      <polygon points="110,30 310,30 320,160 40,160" fill="none" stroke="#ECE8DF" stroke-width="1.5"/>
+      <line x1="110" y1="30" x2="320" y2="160" stroke="#A8A399" stroke-width="1.2"/>
+      <line x1="310" y1="30" x2="40" y2="160" stroke="#A8A399" stroke-width="1.2"/>
+      <circle cx="197.5" cy="84.2" r="3.5" fill="#E0B26B"/>
+      <g fill="#ECE8DF"><text x="96" y="24">A</text><text x="316" y="24">B</text><text x="326" y="178">C</text><text x="20" y="178">D</text></g>
+      <text x="190" y="104" fill="#E0B26B">P</text>
+      <g fill="#A8A399" text-anchor="middle"><text x="130" y="72">3x−1</text><text x="285" y="108">5x−3</text><text x="278" y="72">2x+1</text><text x="140" y="146">6x−5</text></g>
+    </svg>
+    <p class="caption">AB ∥ DC. Sketch not to scale.</p>
+  </section>
+
+  <section class="section">
+    <h2 class="label">My solution</h2>
+    <div class="prose large">
+      <p>In this question, we are solving for DB, which is BP + PD:</p>
+      <p class="formula">DB = BP + PD = (2x + 1) + (6x − 5) = 8x − 4</p>
+      <p>Now, observing the options closely: if I add 4 to the answer, it must be a multiple of 8.</p>
+      <p class="formula">(a) 10 + 4 = 14 &nbsp; (b) 16 + 4 = 20 &nbsp; (c) 14 + 4 = 18 &nbsp; (d) 12 + 4 = 16</p>
+      <p>Only 16 is a multiple of 8, which is possible only in option (d).</p>
+    </div>
+    <p class="answer">Answer: (d) 12 cm</p>
+  </section>
+
+  <section class="section">
+    <h2 class="label muted">Check</h2>
+    <p class="check">The shortcut assumes x is a whole number. To confirm it: the diagonals of a trapezium divide each other in the same ratio, so AP/PC = BP/PD. Cross-multiplying gives (3x − 1)(6x − 5) = (5x − 3)(2x + 1), which simplifies to 2x² − 5x + 2 = 0, so x = 2 or x = ½. At x = ½, PC would be negative, so x = 2 and DB = 8(2) − 4 = 12 cm.</p>
+  </section>
+
+  <div class="footer ruled">
+    <a href="index.html">← All quant notes</a>
+    <span>© 2026 Anuj Sangwan</span>
+  </div>
+
+</div>
+</body>
+</html>

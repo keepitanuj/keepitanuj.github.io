@@ -1,0 +1,57 @@
+/* Shared styles for the notebook site (dark theme) */
+:root{
+  --bg:#141413; --ink:#ECE8DF; --soft:#D8D3C8; --muted:#A8A399;
+  --line:#3A3935; --dot:#6B675F; --accent:#E0B26B;
+  --serif:Newsreader,Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--mono);min-height:100vh}
+a{color:var(--ink);text-decoration:none}
+a:hover,a:focus-visible{color:var(--accent)}
+.wrap{max-width:1000px;margin:0 auto;padding:48px 24px}
+.wrap.narrow{max-width:720px}
+
+.topbar{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:13px;color:var(--muted);border-bottom:1px solid var(--ink);padding-bottom:12px}
+.label{margin:0 0 16px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:400;color:var(--accent)}
+.label.muted{color:var(--muted)}
+
+/* Home */
+.layout{display:flex;flex-wrap:wrap;gap:48px;margin-top:56px;align-items:flex-start}
+.layout main{flex:2;min-width:300px}
+h1{margin:0 0 12px;font-family:var(--serif);font-weight:400;font-size:clamp(38px,6vw,64px);line-height:1.05}
+.lede{margin:0 0 36px;font-family:var(--serif);font-size:19px;line-height:1.5;color:var(--muted);max-width:460px}
+.toc{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--line)}
+.toc a{display:flex;gap:14px;align-items:baseline;padding:20px 0;border-top:1px solid var(--line)}
+.toc .num{width:28px;font-size:13px;color:var(--muted)}
+.toc .name{font-family:var(--serif);font-size:28px}
+.toc .dots{flex:1;border-bottom:1px dotted var(--dot);transform:translateY(-6px)}
+.toc .count{font-size:13px;color:var(--muted)}
+.now{flex:1;min-width:240px;margin-top:8px;border:1px solid var(--line);padding:24px}
+.now dl{margin:0;display:grid;gap:18px;font-size:14px;line-height:1.5}
+.now dt{color:var(--muted);font-size:12px}
+.now dd{margin:2px 0 0}
+.now dd a{border-bottom:1px solid var(--ink)}
+
+/* Essays and notes */
+.essay{margin-top:72px;padding-top:40px;border-top:1px solid var(--line);max-width:640px}
+.essay h2,.note h1{font-family:var(--serif);font-weight:400;line-height:1.12}
+.essay h2{margin:0 0 28px;font-size:clamp(30px,5vw,42px)}
+.prose{font-family:var(--serif);font-size:19px;line-height:1.65;color:var(--soft)}
+.prose p{margin:0 0 20px}
+.prose p:last-child{margin-bottom:0}
+.formula{padding:14px 18px;border:1px solid var(--line);font-family:var(--mono);font-size:14px;color:var(--ink);overflow-x:auto}
+.note h1{margin:56px 0 8px;font-size:clamp(34px,6vw,52px);line-height:1.08}
+.meta{margin:0;font-size:13px;color:var(--muted)}
+.section{margin-top:48px;padding-top:28px;border-top:1px solid var(--line)}
+.prose.large{font-size:20px;line-height:1.6}
+.options{list-style:none;margin:0 0 32px;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;font-size:14px}
+.options li{border:1px solid var(--line);padding:12px 16px}
+.diagram{width:100%;max-width:440px;display:block;font-family:var(--mono);font-size:13px}
+.caption{margin:10px 0 0;font-size:12px;color:var(--muted)}
+.answer{margin:28px 0 0;font-family:var(--mono);font-size:15px;color:var(--accent)}
+.check{font-family:var(--serif);font-size:18px;line-height:1.65;color:var(--muted);margin:0}
+
+.footer{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;margin-top:56px;font-size:13px;color:var(--muted)}
+.footer.ruled{margin-top:64px;padding-top:20px;border-top:1px solid var(--line)}
